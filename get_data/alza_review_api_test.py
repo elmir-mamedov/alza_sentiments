@@ -1,4 +1,5 @@
 from curl_cffi.requests import Session
+import csv
 
 commodity_id = 12541394
 limit = 100
@@ -21,9 +22,10 @@ with Session() as session:
             break
 
 print(f"Total reviews: {len(all_reviews)}")
-for r in all_reviews[:2000]:
-    print(r)
 
-for r in all_reviews:
-    if 'Nutno déle vyzkoušet,' in r['text']:
-        print(r)
+with open("reviews.csv", "w", newline="", encoding="utf-8") as f:
+    writer = csv.DictWriter(f, fieldnames=["text", "label"])
+    writer.writeheader()
+    writer.writerows(all_reviews)
+
+print("Saved to reviews.csv")

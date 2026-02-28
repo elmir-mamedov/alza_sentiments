@@ -10,18 +10,12 @@ import os
 from dotenv import load_dotenv
 
 
-# Load .env
-load_dotenv()
-DATABASE_URL = os.getenv("DATABASE_URL")
+
 
 SITEMAP_URLS = [
     "https://www.alza.cz/_sitemap-live-product.xml",
     "https://www.alza.cz/_sitemap-reviews.xml",
 ]
-
-# Connect to PostgreSQL
-def get_connection():
-    return psycopg.connect(DATABASE_URL, row_factory=dict_row)
 
 async def collect():
     all_urls = []
