@@ -4,3 +4,4 @@ sentiment_results.csv
 __pycache__/
 *.pyc
 *.pyo
+*.csv
