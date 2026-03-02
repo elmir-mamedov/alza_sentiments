@@ -9,12 +9,8 @@ import psycopg # popular PostgreSQL adapter for the Python.
 import os
 from dotenv import load_dotenv
 
-
-
-
 SITEMAP_URLS = [
     "https://www.alza.cz/_sitemap-live-product.xml",
-    "https://www.alza.cz/_sitemap-reviews.xml",
 ]
 
 async def collect():
@@ -50,6 +46,12 @@ async def collect():
 
     print(f"Inserted {inserted} new URLs.")
 
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            # Read the SQL file
+            with open("extract_commodity_id.sql", "r", encoding="utf-8") as f:
+                sql = f.read()
+            cur.execute(sql)
 
 if __name__ == "__main__":
     asyncio.run(collect())
