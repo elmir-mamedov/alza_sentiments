@@ -5,3 +5,6 @@ __pycache__/
 *.pyc
 *.pyo
 *.csv
+*.safetensors
+*.bin
+.DS_Store
