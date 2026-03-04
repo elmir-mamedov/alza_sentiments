@@ -1,5 +1,4 @@
-#train_LogReg.py
-
+from sklearn.model_selection import GridSearchCV
 import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
@@ -32,15 +31,35 @@ pipeline = Pipeline([
     ('clf', LogisticRegression(max_iter=1000, C=1.0, class_weight='balanced'))
 ])
 
-pipeline.fit(X_train, y_train)
+param_grid = {
+    'tfidf__ngram_range': [(2, 4), (2, 5), (3, 5)],
+    'tfidf__max_features': [50_000, 100_000],
+    'tfidf__min_df': [1, 2],
+    'tfidf__sublinear_tf': [True, False],
+    'clf__C': [0.1, 0.5, 1.0, 5.0],
+}
 
-# Evaluate
-y_pred = pipeline.predict(X_test)
-print("=== Classification Report ===")
+grid_search = GridSearchCV(
+    pipeline,
+    param_grid,
+    cv=5,
+    scoring='f1_macro',   # good for imbalanced classes
+    n_jobs=-1,            # use all CPU cores
+    verbose=2
+)
+
+grid_search.fit(X_train, y_train)
+
+print('Best params:', grid_search.best_params_)
+print('Best CV f1_macro:', grid_search.best_score_.round(3))
+
+# Evaluate best model on test set
+y_pred = grid_search.best_estimator_.predict(X_test)
+print('\n=== Classification Report (best model) ===')
 print(classification_report(y_test, y_pred, target_names=['negative', 'positive']))
 
-# Save model
+# Save best model
 with open('sentiment_model.pkl', 'wb') as f:
-    pickle.dump(pipeline, f)
+    pickle.dump(grid_search.best_estimator_, f)
 
-print("\nModel saved to sentiment_model.pkl")
+print('\nBest model saved to sentiment_model.pkl')
