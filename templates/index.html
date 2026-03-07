@@ -70,7 +70,6 @@
     }
 
     textarea:focus { border-color: #4299e1; }
-
     textarea::placeholder { color: #a0aec0; }
 
     button {
@@ -300,14 +299,14 @@
           return;
         }
 
-        // Update result UI
-        resultBox.className = `result ${data.sentiment}`;
-        document.getElementById('emoji').textContent = data.sentiment === 'positive' ? '😊' : '😞';
+        // Update result UI — uses data.label (not data.sentiment)
+        resultBox.className = `result ${data.label}`;
+        document.getElementById('emoji').textContent = data.label === 'positive' ? '😊' : '😞';
         document.getElementById('sentimentLabel').textContent =
-          data.sentiment === 'positive' ? 'Positive review' : 'Negative review';
+          data.label === 'positive' ? 'Positive review' : 'Negative review';
         document.getElementById('confBar').style.width = data.confidence + '%';
         document.getElementById('confLabel').textContent = data.confidence + '%';
-        document.getElementById('reviewEcho').textContent = '"' + data.text + '"';
+        document.getElementById('reviewEcho').textContent = '"' + text + '"';
 
         resultBox.style.display = 'block';
       } catch (err) {
@@ -319,7 +318,6 @@
       }
     }
 
-    // Allow Enter key (Ctrl+Enter to submit)
     document.getElementById('reviewInput').addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && e.ctrlKey) analyze();
     });
