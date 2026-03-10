@@ -114,7 +114,7 @@ Individual customer reviews extracted from the `reviews` API endpoint. One row p
 ## Data not extracted into silver (remains in bronze only)
 
 The following data exists in the raw `productDetail` JSON but was not pulled into the silver layer:
-
+- **Rating Count** (`ratingCount`) - it's 0 in all product.
 - **Structured specs** (`parameterGroups`) — full key-value product parameters (e.g. Battery voltage: 12V, Weight: 1.3kg)
 - **Images** (`imgs`) — up to 11 image URLs per product in multiple resolutions
 - **Related products** (`related_commodity`) — up to 16 recommended products with names, prices, ratings

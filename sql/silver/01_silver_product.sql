@@ -10,7 +10,6 @@ SELECT
     (raw_response->'data'->>'categoryName') AS category,
     (raw_response->'data'->>'gaCategory') AS parent_category,
     (raw_response->'data'->>'rating')::numeric AS rating,
-    (raw_response->'data'->>'ratingCount')::int AS rating_count,
     (raw_response->'data'->>'sales')::int AS sales,
     (raw_response->'data'->>'warranty') AS warranty,
     (raw_response->'data'->>'is_in_stock')::boolean AS in_stock,

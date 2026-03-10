@@ -21,16 +21,18 @@ SELECT
     p.price,
 
     -- Strong predictors
+    p.name,
     p.breadcrumb_section,
     p.breadcrumb_category,
+    p.breadcrumb_subcategory,
     p.producer_id,
     p.eshop,
     p.sales,
     p.warranty,
+    p.spec_summary,
 
     -- Moderate predictors
     p.rating,
-    p.rating_count,
     p.in_stock,
     rs.review_count,
     rs.avg_rating,
