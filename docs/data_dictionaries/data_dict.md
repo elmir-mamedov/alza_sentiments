@@ -34,7 +34,7 @@ Product URLs discovered from Alza's XML sitemap. Used to track scraping progress
 
 ## Silver Layer
 
-### silver_products
+### silver_product
 
 Cleaned, flattened product data extracted from the `productDetail` API endpoint.
 
@@ -77,7 +77,7 @@ Per-product review summary extracted from the `reviewStats` API endpoint.
 | complaint_rate | numeric | `complaint.rate` | Product return/complaint rate (0–1) |
 | complaint_description | text | `complaint.description` | Complaint level label (Czech, e.g. "nízká reklamovanost") |
 
-### silver_reviews
+### silver_review
 
 Individual customer reviews extracted from the `reviews` API endpoint. One row per review.
 
@@ -101,7 +101,7 @@ Individual customer reviews extracted from the `reviews` API endpoint. One row p
 ### gold_category_stats
 
 
-### gold_top_products
+### gold_top_product
 
 ---
 
