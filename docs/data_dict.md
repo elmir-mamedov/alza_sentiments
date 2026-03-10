@@ -48,7 +48,6 @@ Cleaned, flattened product data extracted from the `productDetail` API endpoint.
 | category | text | `data.categoryName` | Lowest-level category (e.g. "Cordless") |
 | parent_category | text | `data.gaCategory` | Top-level section (e.g. "House, Hobby and Garden") |
 | rating | numeric | `data.rating` | Average star rating (0–5) |
-| rating_count | integer | `data.ratingCount` | Number of star ratings |
 | sales | integer | `data.sales` | Total units sold |
 | warranty | text | `data.warranty` | Warranty period (e.g. "24 months") |
 | in_stock | boolean | `data.is_in_stock` | Whether product is currently available |
