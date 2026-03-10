@@ -100,98 +100,14 @@ Individual customer reviews extracted from the `reviews` API endpoint. One row p
 
 ### gold_category_stats
 
-Aggregated product and review metrics per category. One row per parent_category + category combination.
-
-| Column | Type | Description |
-|---|---|---|
-| parent_category | text | Top-level section |
-| category | text | Product category |
-| product_count | integer | Number of products in this category |
-| avg_price | numeric | Average product price (CZK) |
-| min_price | numeric | Cheapest product in category |
-| max_price | numeric | Most expensive product in category |
-| avg_rating | numeric | Average star rating across products |
-| total_sales | integer | Sum of units sold |
-| avg_complaint_rate | numeric | Average complaint rate |
-| avg_recommendation_rate | numeric | Average recommendation rate |
-| total_reviews | integer | Sum of text reviews |
 
 ### gold_top_products
-
-Products ranked by a quality score that balances rating with review volume. Filtered to products with 5+ reviews.
-
-| Column | Type | Description |
-|---|---|---|
-| product_id | integer | Alza product ID |
-| name | text | Product name |
-| price | numeric | Current price (CZK) |
-| category | text | Product category |
-| parent_category | text | Top-level section |
-| in_stock | boolean | Stock availability |
-| avg_rating | numeric | Average star rating |
-| review_count | integer | Number of text reviews |
-| recommendation_rate | numeric | Fraction of positive reviews |
-| complaint_rate | numeric | Return/complaint rate |
-| quality_score | numeric | Weighted score: 70% rating + 30% review volume (capped at 100 reviews) |
-
-### gold_review_trends
-
-Monthly aggregation of review activity across all products.
-
-| Column | Type | Description |
-|---|---|---|
-| month | timestamp | First day of the month |
-| review_count | integer | Total reviews posted that month |
-| avg_rating | numeric | Average rating that month |
-| positive_reviews | integer | Reviews with rating >= 4 |
-| negative_reviews | integer | Reviews with rating <= 2 |
-| products_reviewed | integer | Distinct products that received reviews |
-
-### gold_complaint_analysis
-
-Product-level complaint risk assessment. Only includes products with a known complaint rate.
-
-| Column | Type | Description |
-|---|---|---|
-| parent_category | text | Top-level section |
-| category | text | Product category |
-| product_id | integer | Alza product ID |
-| name | text | Product name |
-| price | numeric | Current price (CZK) |
-| avg_rating | numeric | Average star rating |
-| review_count | integer | Number of text reviews |
-| complaint_rate | numeric | Return/complaint rate |
-| complaint_description | text | Complaint level label (Czech) |
-| risk_level | text | Derived flag: `high` (>10%), `medium` (>5%), `low` (>2%), `minimal` |
 
 ---
 
 ## ML
 
 ### ml_price_features
-
-Feature table for price prediction model. Joins silver_products with silver_review_stats. Excludes products with zero or null price.
-
-| Column | Type | Description |
-|---|---|---|
-| product_id | integer | Alza product ID |
-| price | numeric | Target variable — current price (CZK) |
-| category | text | Product category |
-| parent_category | text | Top-level section |
-| breadcrumb_section | text | Breadcrumb level 0 |
-| rating | numeric | Product rating |
-| rating_count | integer | Number of star ratings |
-| sales | integer | Units sold |
-| in_stock | boolean | Stock availability |
-| warranty | text | Warranty period |
-| eshop | text | Alza sub-store |
-| avg_rating | numeric | Average rating from review stats |
-| review_count | integer | Number of text reviews |
-| recommendation_rate | numeric | Fraction of positive reviews |
-| complaint_rate | numeric | Return/complaint rate |
-| purchase_count_text | text | Purchase volume bucket |
-| rating_review_gap | integer | Difference between review_count and rating_count |
-| discount_pct | numeric | Discount percentage from original price |
 
 ---
 
